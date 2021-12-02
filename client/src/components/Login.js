@@ -60,6 +60,17 @@ export default function SignIn() {
       })
   };
 
+  const handleUpdate = () => {
+    console.log(movieName, movieReview)
+    Axios.put('http://localhost:3001/api/update', { movieName, movieReview })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -114,13 +125,22 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+            <Button
+              type="button"
+              fullWidth
+              variant="outlined"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={()=>handleUpdate()}
+            >
+              Update
+            </Button>
           </Box>
         </Box>
         <ul>
           {movieList && movieList.map((item, index) => (
             <li key={index}
               onClick={() => handleDelete(item.movieName)}
-            >{item.movieName}</li>
+            >{item.movieName}: {item.movieReview}</li>
           ))}
         </ul>
       </Container>

@@ -40,6 +40,15 @@ app.delete('/api/delete/:movieName', (req, res) => {
     })
 })
 
+app.put('/api/update', (req, res) => {
+    const { movieName, movieReview } = req.body;
+    // const { movieName, movieReviews } = req.params;
+    const sqlUpdate = "UPDATE movieReview SET movieReview = ? WHERE movieName = ?;"
+    db.query(sqlUpdate, [movieReview, movieName], (err, result) => {
+        if (err) console.log(err);
+    })
+})
+
 app.listen(3001, () => {
     console.log('running on port 3001');
 })
