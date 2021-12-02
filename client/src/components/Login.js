@@ -49,6 +49,17 @@ export default function SignIn() {
       })
   };
 
+  const handleDelete = name => {
+    console.log(name)
+    Axios.delete(`http://localhost:3001/api/delete/${name}`)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -107,7 +118,9 @@ export default function SignIn() {
         </Box>
         <ul>
           {movieList && movieList.map((item, index) => (
-            <li key={index}>{item.movieName}</li>
+            <li key={index}
+              onClick={() => handleDelete(item.movieName)}
+            >{item.movieName}</li>
           ))}
         </ul>
       </Container>

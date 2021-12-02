@@ -3,7 +3,7 @@ const cors = require('cors');
 const app = express();
 const mysql = require('mysql');
 const db = mysql.createPool({
-    host: 'rds-mysql-10mintutorial.c4biag33tebm.ap-northeast-1.rds.amazonaws.com',
+    host: 'my-library.c4biag33tebm.ap-northeast-1.rds.amazonaws.com',
     user: 'bell881122',
     password: 'mypassword',
     database: 'CRUDDataBase',
@@ -29,6 +29,14 @@ app.post("/api/insert", (req, res) => {
         console.log("result", result)
         console.log("err", err)
         res.send('Hello World');
+    })
+})
+
+app.delete('/api/delete/:movieName', (req, res) => {
+    const { movieName } = req.params;
+    const sqlDelete = "DELETE FROM movieReview WHERE movieName = ?;"
+    db.query(sqlDelete, movieName, (err, result) => {
+        if (err) console.log(err);
     })
 })
 
