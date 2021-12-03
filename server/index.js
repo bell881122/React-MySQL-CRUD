@@ -15,6 +15,10 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    res.send("Node.js is running.")
+})
+
 app.get('/api/get', (req, res) => {
     const sqlSelect = "SELECT * FROM movieReview;"
     db.query(sqlSelect, (err, result) => {
